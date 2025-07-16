@@ -1,70 +1,128 @@
-# Getting Started with Create React App
+# My Reddit Clone App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+This is a single-page application (SPA) built with React and Redux that allows users to browse, search, and filter posts from Reddit. Users can also view a detailed modal for each post, including its comments.
 
-In the project directory, you can run:
+## Live Demo
 
-### `npm start`
+[Link to your GitHub Pages live site (once the proxy is set up and it's working)]
+*(Note: As of now, the live site may not fully function due to Reddit API restrictions on client-side requests. A server-side proxy will be needed for full functionality.)*
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies Used
 
-### `npm test`
+* **React:** A JavaScript library for building user interfaces.
+* **Redux Toolkit:** The official, opinionated, batteries-included toolset for efficient Redux development, including `createSlice` and `createAsyncThunk`.
+* **React Redux:** Official React bindings for Redux.
+* **Tailwind CSS:** A utility-first CSS framework for rapidly building custom designs.
+* **@tailwindcss/typography:** A Tailwind CSS plugin that provides a set of `prose` classes to add beautiful typographic defaults to raw HTML.
+* **PostCSS:** A tool for transforming CSS with JavaScript plugins, used by Tailwind.
+* **Autoprefixer:** A PostCSS plugin to parse CSS and add vendor prefixes to CSS rules.
+* **`gh-pages`:** A utility to publish a `build` directory to a `gh-pages` branch on GitHub.
+* **Reddit API:** Used to fetch post and comment data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Features
 
-### `npm run build`
+### Current Features:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* **Browse Popular Posts:** Displays a feed of popular posts from Reddit on initial load.
+* **Search Posts:** Allows users to search Reddit posts by keywords using a dedicated search bar.
+* **Filter Categories:** Provides buttons (Hot, New, Top) to filter the "popular" feed.
+* **Detailed Post View (Modal):** Clicking on any post opens a modal displaying:
+    * Full post title and content (text, images, videos, external links).
+    * Author, subreddit, upvotes, and comment count.
+    * Dynamically fetched and displayed comments for that specific post.
+* **Responsive Design:** (To be fully implemented/verified) The application layout adapts to various screen sizes (desktop, tablet, mobile).
+* **Error Handling:** Displays user-friendly messages for API fetch failures.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Planned Features (Future Work):
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+* **Subreddit Navigation:** Allow users to directly navigate to specific subreddits (e.g., `/r/reactjs`).
+* **Infinite Scrolling/Pagination:** Implement a way to load more posts as the user scrolls or clicks a "Load More" button to handle large datasets.
+* **User Authentication (Optional):** Integrate Reddit's OAuth for user login, allowing upvoting/downvoting, saving posts, etc.
+* **Improved Media Handling:** More robust handling for various media types (e.g., galleries, GIFs, embedded content).
+* **Accessibility Enhancements:** Ensure the application is fully accessible (keyboard navigation, ARIA attributes).
+* **Animations and Transitions:** Add delightful animations for UI interactions (e.g., modal open/close, post loading).
+* **Unit and End-to-End Testing:** Implement comprehensive tests for components and user flows.
+* **Lighthouse Optimization:** Optimize for performance, accessibility, best practices, and SEO to achieve high Lighthouse scores.
+* **Server-Side Proxy:** Implement a small Node.js/Express (or similar) proxy server to bypass client-side `User-Agent` restrictions for live deployment on GitHub Pages.
+* **Rate Limit Handling:** Programmatically address Reddit API rate limits (e.g., with caching, debouncing).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To run this project locally:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/kyliejustjames/kanban-project.git](https://github.com/kyliejustjames/kanban-project.git)
+    cd kanban-project
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+3.  **Set up Tailwind CSS (for v4.x.x):**
+    * Ensure `@tailwindcss/typography` is installed: `npm install @tailwindcss/typography`
+    * Ensure `@tailwindcss/cli` is installed: `npm install -D @tailwindcss/cli`
+    * Manually create `postcss.config.js` in your project root:
+        ```javascript
+        // postcss.config.js
+        module.exports = {
+          plugins: {
+            tailwindcss: {},
+            autoprefixer: {},
+          },
+        };
+        ```
+    * Manually create `tailwind.config.js` in your project root:
+        ```javascript
+        // tailwind.config.js
+        /** @type {import('tailwindcss').Config} */
+        module.exports = {
+          content: [
+            "./src/**/*.{js,jsx,ts,tsx}",
+          ],
+          theme: {
+            extend: {},
+          },
+          plugins: [
+            require('@tailwindcss/typography'),
+          ],
+        }
+        ```
+    * Ensure your `src/App.css` contains only:
+        ```css
+        /* src/App.css */
+        @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+        ```
+4.  **Start the development server:**
+    ```bash
+    npm start
+    ```
+    The app will open in your browser at `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Deployment
 
-## Learn More
+This application is deployed to GitHub Pages.
+To deploy:
+1.  Ensure `gh-pages` is installed: `npm install gh-pages --save-dev`
+2.  Add the `homepage` and `deploy` scripts to your `package.json`:
+    ```json
+    "homepage": "[https://kyliejustjames.github.io/kanban-project](https://kyliejustjames.github.io/kanban-project)",
+    "scripts": {
+      // ... other scripts
+      "predeploy": "npm run build",
+      "deploy": "gh-pages -d build"
+    }
+    ```
+3.  Run the deploy command:
+    ```bash
+    npm run deploy
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://kyliejustjames.github.io/kanban-project",
-    "dependencies": {
+  "dependencies": {
     "@reduxjs/toolkit": "^2.8.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
@@ -15,6 +15,7 @@
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
     "react-scripts": "5.0.1",
+    "redux-thunk": "^3.1.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -22,7 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build", 
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
@@ -44,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "cypress": "^14.5.2",
     "gh-pages": "^6.3.0"
   }
 }
