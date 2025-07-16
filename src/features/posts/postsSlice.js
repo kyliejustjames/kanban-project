@@ -4,9 +4,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
   async (subreddit = 'popular') => {
+
     const url = subreddit === 'popular'
-      ? '/.json' 
-      : `/r/${subreddit}/.json`; 
+        ? '/.json' 
+        : `/r/${subreddit}/.json`; 
 
     console.log(`Fetching from proxy: ${url}`); 
 
