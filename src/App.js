@@ -1,33 +1,32 @@
 // src/App.js
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, incrementByAmount, selectCount } from './features/counter/counterSlice';
-import './App.css'; // Keep original CSS if you want, or remove if not needed
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Header from './components/Header';
+import PostsList from './components/PostsList';
+import { fetchPosts, selectPostsStatus, selectPostsError } from './features/posts/postsSlice';
+import './App.css'; 
 
 function App() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
+  const postsStatus = useSelector(selectPostsStatus);
+  const error = useSelector(selectPostsError);
+
+  useEffect(() => {
+    if (postsStatus === 'idle') {
+      dispatch(fetchPosts('popular'));
+    }
+  }, [postsStatus, dispatch]);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Redux Counter Example</h1>
-        <p>Count: {count}</p>
-        <div>
-          <button onClick={() => dispatch(increment())}>
-            Increment
-          </button>
-          <button onClick={() => dispatch(decrement())}>
-            Decrement
-          </button>
-          <button onClick={() => dispatch(incrementByAmount(5))}>
-            Increment by 5
-          </button>
+    <div className="min-h-screen bg-sky-50">
+      <Header />
+      <main>
+        <PostsList />
+      </main>
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-blue-700 text-white p-3 rounded-lg shadow-lg">
+          <p>{error}</p>
         </div>
-        <p style={{ marginTop: '20px', fontSize: '0.8em' }}>
-          This counter is managed by Redux.
-        </p>
-      </header>
     </div>
   );
 }

@@ -1,10 +1,9 @@
 // src/app/store.js
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice'; // Import your counter reducer
+import postsReducer from '../features/posts/postsSlice'; // This import should already be here
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer, // Add your counter reducer here
-    // other features will go here
+    posts: postsReducer, // This entry should already be here
   },
 });
