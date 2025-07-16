@@ -4,21 +4,25 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
   async (subreddit = 'popular') => {
+    const baseUrl =
+      process.env.NODE_ENV === 'production'
+        ? 'https://www.reddit.com' 
+        : ''; 
 
     const url = subreddit === 'popular'
-        ? '/.json' 
-        : `/r/${subreddit}/.json`; 
+      ? `${baseUrl}/.json` 
+      : `${baseUrl}/r/${subreddit}/.json`; 
 
-    console.log(`Fetching from proxy: ${url}`); 
+    console.log(`Fetching from: ${url}`); 
 
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'my-reddit-clone-app/1.0 (by your_reddit_username)',
+        'User-Agent': 'my-reddit-clone-app/1.0 (by kyliejustjames)', 
       },
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status} from proxy path ${url}`);
+      throw new Error(`HTTP error! status: ${response.status} from ${url}`);
     }
 
     const json = await response.json();
