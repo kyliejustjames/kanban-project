@@ -6,18 +6,18 @@ export const fetchPosts = createAsyncThunk(
   async (subreddit = 'popular') => {
     const baseUrl =
       process.env.NODE_ENV === 'production'
-        ? 'https://www.reddit.com' 
-        : ''; 
+        ? 'https://www.reddit.com'
+        : '';
 
     const url = subreddit === 'popular'
-      ? `${baseUrl}/.json` 
-      : `${baseUrl}/r/${subreddit}/.json`; 
+      ? `${baseUrl}/.json`
+      : `${baseUrl}/r/${subreddit}/.json`;
 
-    console.log(`Fetching from: ${url}`); 
+    console.log(`Fetching from: ${url}`);
 
     const response = await fetch(url, {
       headers: {
-        'User-Agent': 'my-reddit-clone-app/1.0 (by kyliejustjames)', 
+        'User-Agent': 'my-reddit-clone-app/1.0 (by kyliejustjames)', // Ensure your username is here
       },
     });
 
@@ -30,6 +30,7 @@ export const fetchPosts = createAsyncThunk(
     return json.data.children.map(post => post.data);
   }
 );
+
 
 const postsSlice = createSlice({
   name: 'posts',
